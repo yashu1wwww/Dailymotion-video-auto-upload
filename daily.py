@@ -9,33 +9,41 @@ from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.keys import Keys
 import time
 
-driver = webdriver.Chrome()
-driver.get("https://www.dailymotion.com/dm/partner/sign-in") 
-time.sleep(5)
-driver.find_element_by_name("username").send_keys("dailytell23@gmail.com") #replace with your email
-time.sleep(1)
-driver.find_element_by_xpath('//*[@id="react-root"]/main/div/main/form/div/button').click()
+driver = webdriver.Chrome()  
+driver.get('https://www.dailymotion.com/signin')
+
 time.sleep(3)
-driver.find_element_by_xpath('//*[@id="react-root"]/main/div/main/form/div/div[2]/span/input').send_keys("Daily@#$%") #replace with your password
-time.sleep(1)
-driver.find_element_by_xpath('//*[@id="react-root"]/main/div/main/form/div/button').click()
-time.sleep(7)
-#driver.find_element_by_css_selector("#react-root > div > header > div.src-common-layouts-global-nav-index__cellTopRight--13_FD > div.src-app-wrapper__createContentMenuButton--FBBxc.popoverMode > svg").click()
-#driver.find_element_by_xpath('//*[@id="scrollable"]/span/span/button').click()
-driver.find_element_by_xpath('//*[@id="scrollable"]/span/span/button/span').click()
-#driver.find_element_by_css_selector("#scrollable > span > span > button > span").click()
-#driver.find_element_by_css_selector("#scrollable > span > span > button").click()
-#driver.find_element_by_xpath('//*[@id="react-root"]/div/div/main/div/div/div/div/div/div[2]/span[2]
-#driver.find_element_by_css_selector("#react-root > div > div > main > div > div > div > div > div > div.src-routes-media-common-components-empty-list-index__root--38xIj > span.src-routes-media-common-components-empty-list-index__link--2hCRT").click()
-#driver.find_element_by_xpath('//*[@id="react-root"]/div/div/main/div/div/div/div/div/div[2]/span[2]/a').click()
-#driver.find_element_by_xpath('//*[@id="react-root"]/div/div/main/div/div/div/div/div/div[2]/span[2]/a').click()
-#driver.find_element_by_xpath('//*[@id="react-root"]/div/div/main/div/div/div/div/div/div[2]/span[2]').click()
-#driver.find_element_by_css_selector("#react-root > div > div > main > div > div > div > div > div > div.src-routes-media-common-components-empty-list-index__root--38xIj > span.src-routes-media-common-components-empty-list-index__link--2hCRT > a > span").click()
-#driver.find_element_by_xpath('//*[@id="react-root"]/div/div/main/div/div/div/div/div/div[2]/span[2]/a/span').click()
+
+driver.find_element_by_css_selector("#root > div > div.CookiePopup__desktopContainer____u4u4 > button").click()
+
+time.sleep(2)
+
+driver.find_element_by_name("email").send_keys("motion1212@gmail.com") #replace with your dailymotion email
+
+time.sleep(2)
+
+driver.find_element_by_name("password").send_keys("motion#$%") #replace with your dailymotion password
+
 time.sleep(3)
-driver.find_element_by_xpath('//input[@type="file"]').send_keys(r"C:\Users\Hp\Desktop\nest\videos\video is good.mp4") #path of the video where you want you upload
-time.sleep(13)
-# Submit the upload form
-submit_button = driver.find_element_by_id("submit_button_id")
-submit_button.click()
-time.sleep(10)
+
+driver.find_element_by_xpath('//*[@id="root"]/div/main/div/div/div/div[1]/form/div/button').click()
+
+time.sleep(3)
+
+# Navigate to the upload page
+driver.get('https://www.dailymotion.com/upload')
+
+time.sleep(6)
+
+driver.find_element_by_xpath('//input[@type="file"]').send_keys(r"C:\Users\yashw\Desktop\face\dailymotion success story part-1.mkv") #path of the video where your video located
+
+time.sleep(4)
+
+driver.find_element_by_name("description").send_keys("dailymotion success story part-1 video") #change description to your video whats need..
+
+time.sleep(20)
+
+#in upcoming days i will try to update the category auto select others reamining things after decription or if you know means fork it...
+
+
+
