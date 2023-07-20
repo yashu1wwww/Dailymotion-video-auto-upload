@@ -12,9 +12,9 @@ import time
 driver = webdriver.Chrome()  
 driver.get('https://www.dailymotion.com/signin')
 
-time.sleep(3)
+time.sleep(4)
 
-driver.find_element_by_css_selector("#root > div > div.CookiePopup__desktopContainer____u4u4 > button").click()
+driver.find_element_by_css_selector("#root > div > div.CookiePopup__desktopContainer____u4u4 > button").click() #click on notification button 
 
 time.sleep(2)
 
