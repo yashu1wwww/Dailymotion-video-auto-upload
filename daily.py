@@ -1,49 +1,52 @@
 from selenium import webdriver
-from selenium.webdriver.support.ui import Select
-from selenium.webdriver.remote.webelement import WebElement
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.chrome.options import Options
 import time
+import os
 
-driver = webdriver.Chrome()  
+# Setup Chrome options (optional: headless, disable logs etc.)
+chrome_options = Options()
+chrome_options.add_argument("--disable-notifications")
+# chrome_options.add_argument("--headless")  # Optional for background mode
+
+# Initialize WebDriver
+driver = webdriver.Chrome(options=chrome_options)
+wait = WebDriverWait(driver, 15)
+
+# Open Dailymotion login page
 driver.get('https://www.dailymotion.com/signin')
 
-time.sleep(4)
+# Accept cookies
+try:
+    accept_btn = wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, "button.CookiePopup__button___2_4ue")))
+    accept_btn.click()
+except:
+    print("Cookie popup not found or already accepted.")
 
-driver.find_element_by_css_selector("#root > div > div.CookiePopup__desktopContainer____u4u4 > button").click() #click on notification button 
+# Login process
+wait.until(EC.presence_of_element_located((By.NAME, "email"))).send_keys("motion1212@gmail.com")
+wait.until(EC.presence_of_element_located((By.NAME, "password"))).send_keys("motion#$%")
+driver.find_element(By.XPATH, "//form//button").click()
 
-time.sleep(2)
-
-driver.find_element_by_name("email").send_keys("motion1212@gmail.com") #replace with your dailymotion email
-
-time.sleep(2)
-
-driver.find_element_by_name("password").send_keys("motion#$%") #replace with your dailymotion password
-
-time.sleep(3)
-
-driver.find_element_by_xpath('//*[@id="root"]/div/main/div/div/div/div[1]/form/div/button').click()
-
-time.sleep(3)
-
-# Navigate to the upload page
+# Navigate to upload page
+wait.until(EC.url_contains("dailymotion.com"))
 driver.get('https://www.dailymotion.com/upload')
 
-time.sleep(6)
+# Upload video
+video_path = r"C:\Users\yashw\Desktop\face\dailymotion success story part-1.mkv"
+wait.until(EC.presence_of_element_located((By.XPATH, '//input[@type="file"]'))).send_keys(video_path)
 
-driver.find_element_by_xpath('//input[@type="file"]').send_keys(r"C:\Users\yashw\Desktop\face\dailymotion success story part-1.mkv") #path of the video where your video located
+# Fill description
+desc_box = wait.until(EC.presence_of_element_located((By.NAME, "description")))
+desc_box.clear()
+desc_box.send_keys("dailymotion success story part-1 video")
 
-time.sleep(4)
-
-driver.find_element_by_name("description").send_keys("dailymotion success story part-1 video") #change description to your video whats need..
-
+# Optional: Wait to visually confirm
 time.sleep(20)
 
-#in upcoming days i will try to update the category auto select others reamining things after decription or if you know means fork it...
-
-
-
+# Done
+print("✅ Upload and description completed.")
+# driver.close()  
